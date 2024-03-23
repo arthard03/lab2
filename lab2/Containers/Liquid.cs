@@ -4,30 +4,43 @@ namespace lab2.Containers;
 
 public class Liquid: Container,IHazardNotifier
 {
-    public int MaxWeight = 450;
-    public int Mass;
-    public bool HazardousCargo { get; private set; }
+ 
+    public bool HazardousCargo { get;  set; }
 
     public Liquid():base("Lq")
     {
+       TareWeight  = 600;
     }
-    public int GetAvailableCapacity()
+    public double GetAvailableCapacity()
     {
-        return HazardousCargo ? MaxWeight / 2 : MaxWeight * 9 / 10;
-    }
-    public void LoadCargo(int cargoMass)
-    {
-        if (cargoMass > GetAvailableCapacity())
+        if (HazardousCargo)
         {
-            throw new OverfillException("Cargo mass exceeds container capacity");
+            return TareWeight / 2;
         }
-        Mass += cargoMass;
+        else
+        {
+            return TareWeight* 9 / 10;
+        }
     }
-    // public void NotifyHazard(string containerNumber)
-    // {
-    //     Console.WriteLine($"Hazardous situation with liquid container {containerNumber}");
-    // }
-    public void NotifyHazard(string containerNumber)
+
+    public override void LoadCargo(int cargoMass)
     {
+        try
+        {
+            double availableCapacity = GetAvailableCapacity();
+            if (cargoMass > availableCapacity)
+            {
+                throw new OverfillException("Cargo mass exceeds container capacity");
+            }
+        }
+        catch (OverfillException ex)
+        {
+            Console.WriteLine("Overfill container ");
+        }
+    }
+
+    public new void NotifyHazard(string containerNumber)
+    {
+        Console.WriteLine("Hazardous situation with liquid container: "+containerNumber);
     }
 }

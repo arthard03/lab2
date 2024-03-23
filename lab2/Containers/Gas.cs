@@ -2,36 +2,32 @@
 
 namespace lab2.Containers
 {
-    public class Gas : Container, IHazardNotifier
-    
-    {
-        public double Pressure { get; private set; }
-public int  MaxWeight =450;
-public double Mass;
-public Gas(double pressure, int maxWeight) : base("G")
-{
-    Pressure = pressure;
-    MaxWeight = maxWeight;
-}
-        public void LoadCargo(int cargoMass)
-        {
-            if (cargoMass > MaxWeight)
-                throw new OverfillException("Exceeds weight of the container");
+    public class Gas : Container
 
-            Mass += cargoMass;
+    {
+        public double Pressure { get;  set; }
+
+        public Gas(double pressure) : base("Gs")
+        {
+            Pressure = pressure;
+            TareWeight = 500;
+            Height = Height;
+
         }
 
 
         public override void EmptyCargo()
         {
-            // Leave 5% of cargo inside the container
-            Mass = Math.Floor(Mass * 0.05);
+            TareWeight = Math.Floor(TareWeight * 0.05);
         }
 
 
         public override void NotifyHazard(string containerNumber)
         {
-            Console.WriteLine($"Gas leak detected! Container serial number: {containerNumber}");
+            Console.WriteLine("Gas leak ,Container serial number: " + containerNumber);
         }
+
+      
     }
+
 }

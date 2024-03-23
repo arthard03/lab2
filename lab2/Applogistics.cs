@@ -2,9 +2,10 @@
 
 // Console.WriteLine("Started lab2");
 
+using System.ComponentModel;
 using lab2.Containers;
 
-
+namespace lab2;
 
 public class AppLogistics
 {
@@ -12,11 +13,20 @@ public class AppLogistics
     {
         Liquid liquid = new Liquid();
         liquid.GetSerialNumber();
-        Gas gas = new Gas(3,332);
+        Gas gas = new Gas(2);
         gas.GetSerialNumber();
-        gas.NotifyHazard(gas.GetSerialNumber());
+        // gas.LoadCargo(600);
+        // gas.NotifyHazard(gas.GetSerialNumber());
         // gas.LoadCargo(cargoMass:40540);
         // gas.NotifyHazard(containerNumber:"3");
+        Refrigerated refrigerated = new Refrigerated(ProductType.Meat,-2);
+        refrigerated.LoadCargo(454);
+        // refrigerated.LoadCargo(322);
+        // // gas.ToString();
+        // Console.WriteLine(gas.ToString());
+        Console.WriteLine(refrigerated.ToString());
+        var refrigeratedHeight = refrigerated.Height;
+        Console.WriteLine(refrigeratedHeight);
     }
     
     
