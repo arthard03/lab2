@@ -9,7 +9,7 @@ public abstract class Container : IHazardNotifier
     public double TareWeight { get; set; }
     public int Depth { get; set; }
     public string SerialNumber { get; set; }
-    public abstract object GetAdditionalInformation(); // Abstract method for additional information
+    public abstract object GetAdditionalInformation(); 
 
 
     private Random rand = new Random();
