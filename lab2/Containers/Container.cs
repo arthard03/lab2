@@ -1,15 +1,16 @@
-﻿using System.Security.Cryptography;
-using lab2.Containers.Exceptions;
+﻿using lab2.Containers.Exceptions;
 
 namespace lab2.Containers;
 
 public abstract class Container : IHazardNotifier
 {
     public double Mass { get; set; }
-    public double Height { get; set; }
+    public int Height { get; set; }
     public double TareWeight { get; set; }
-    public double Depth { get; set; }
+    public int Depth { get; set; }
     public string SerialNumber { get; set; }
+    public abstract object GetAdditionalInformation(); // Abstract method for additional information
+
 
     private Random rand = new Random();
     public Container(String type)
@@ -18,7 +19,8 @@ public abstract class Container : IHazardNotifier
         string code = myuiid.ToString();
         this.SerialNumber = code;
         SerialNumber = ("KON-" + type + "-" + code);
-        this.Height = rand.NextDouble() * (25 - 5) + 5;
+        this.Height = (int)(rand.NextDouble() * (50 - 5) + 5);
+        this.Depth =  (int)(rand.NextDouble() * (100 - 5) + 5);
     }
 
 
@@ -30,12 +32,15 @@ public abstract class Container : IHazardNotifier
             {
                 throw new OverfillException("Cargo mass exceeds container capacity");
             }
+            this.Mass += cargoMass;
         }
-        catch (OverfillException ex)
+        catch (OverfillException)
         {
             Console.WriteLine("Cargo mass exceeds container capacity");
         }
     }
+
+
 
     public virtual void EmptyCargo()
     {

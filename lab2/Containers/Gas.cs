@@ -1,6 +1,4 @@
-﻿using lab2.Containers.Exceptions;
-
-namespace lab2.Containers
+﻿namespace lab2.Containers
 {
     public class Gas : Container
 
@@ -16,6 +14,15 @@ namespace lab2.Containers
         }
 
 
+        public override object GetAdditionalInformation()
+        {
+            return new
+            {
+                Depth,
+                Height,
+                Pressure
+            };
+        }
         public override void EmptyCargo()
         {
             TareWeight = Math.Floor(TareWeight * 0.05);

@@ -23,7 +23,18 @@ public class Liquid: Container,IHazardNotifier
         }
     }
 
-    public override void LoadCargo(int cargoMass)
+
+    public override object GetAdditionalInformation()
+    {
+        return new
+        {
+            Depth,
+            Height,
+            HazardousCargo
+        };
+    }
+
+    public  void LoadCargo(int cargoMass)
     {
         try
         {
@@ -32,8 +43,10 @@ public class Liquid: Container,IHazardNotifier
             {
                 throw new OverfillException("Cargo mass exceeds container capacity");
             }
+
+            Mass += cargoMass;
         }
-        catch (OverfillException ex)
+        catch (OverfillException)
         {
             Console.WriteLine("Overfill container ");
         }
@@ -43,4 +56,5 @@ public class Liquid: Container,IHazardNotifier
     {
         Console.WriteLine("Hazardous situation with liquid container: "+containerNumber);
     }
+    
 }

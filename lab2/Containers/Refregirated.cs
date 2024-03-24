@@ -1,5 +1,4 @@
-﻿
-namespace lab2.Containers
+﻿namespace lab2.Containers
 {
     public enum ProductType
     {
@@ -22,7 +21,7 @@ namespace lab2.Containers
             {
                 ValidateTemperatureRange();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine("Wrong temperature for the product: "+ProductType);
             }
@@ -87,9 +86,17 @@ namespace lab2.Containers
             }
         }
 
-        public override string ToString()
+ 
+
+        public override object GetAdditionalInformation()
         {
-            return base.ToString();
+            return new
+            {
+                Depth,
+                Height,
+                ProductType,
+                Temperature
+            };
         }
     }
 }
