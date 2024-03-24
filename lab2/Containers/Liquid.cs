@@ -13,14 +13,17 @@ public class Liquid: Container,IHazardNotifier
     }
     public double GetAvailableCapacity()
     {
+        TareWeight = this.TareWeight;
         if (HazardousCargo)
         {
-            return TareWeight / 2;
+            return TareWeight * 0.5;
         }
         else
         {
-            return TareWeight* 9 / 10;
+            return TareWeight * 0.9;
         }
+
+        return TareWeight;
     }
 
 
@@ -34,7 +37,7 @@ public class Liquid: Container,IHazardNotifier
         };
     }
 
-    public  void LoadCargo(int cargoMass)
+    public override void LoadCargo(int cargoMass)
     {
         try
         {
